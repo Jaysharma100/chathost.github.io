@@ -1,18 +1,31 @@
-<h2>Login</h2>
-
-<% 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/own.css">
+</head>
+<body>
+    <% 
     if(typeof message!=='undefined'){
         %>
         <h4 style="color: red;"><%= message %></h4>
         <%
     }
-%>
-
-<form action="" method="post">
-    <input type="email" placeholder="Enter email" name="email" required >
-    <br>
-    <input type="password" placeholder="Enter password" name="password" required>
-    <br>
-    <input type="submit" value="Login">
-
-</form>
+    %>
+    <div class="login">
+    <h1>.....CHATHOST.....</h1>
+    <h2>LOGIN</h2>
+    <form action="" method="post">
+        <input type="email" placeholder="Enter email" name="email" required >
+        <br>
+        <input type="password" placeholder="Enter password" name="password" required>
+        <br>
+        <input type="submit" value="Login">
+        
+    </form>
+    <a href="/register">GO TO REGISTER</a>
+</div>  
+</body>
+</html>

@@ -65,3 +65,58 @@
     margin: 10px;
     color: black;
 }
+.login{
+    background-color: blueviolet;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+}
+.login form{
+    border: 3px solid rgb(250, 252, 250);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4vh;
+    height: 30vh;
+    width: 20vw;
+    border-radius: 3vh;
+}
+.login form input{
+    height: 10vh;
+    width: 16vw;
+    border-radius: 3vh;
+}
+.register{
+    background-color: blueviolet;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+}
+.register form{
+    border: 3px solid rgb(250, 252, 250);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4vh;
+    height: 30vh;
+    width: 20vw;
+    border-radius: 3vh;
+}
+.register form input{
+    height: 10vh;
+    width: 16vw;
+    border-radius: 3vh;
+}
+a{
+    color: aliceblue;
+}
