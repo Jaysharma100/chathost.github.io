@@ -1,0 +1,101 @@
+
+<%- include('layouts/headers.ejs') %>
+<h2 class="mb-4">HII, <%= user.name %></h2>
+
+<div class="main1">
+    <div class="userlist">
+        <ul class="list-group">
+            <% 
+                if(users.length>0){
+                    for(let k=0;k <users.length;k++){
+                        var statusClass = users[k].onlineinfo === '1' ? 'online' : 'offline';
+                        %>
+                        <li class="list-group-item list-group-item-dark user-list <%=statusClass %>" id="<%= users[k]._id %>">
+                            <%= users[k].name %>
+                        </li>
+                        <%
+                    }
+                }
+             %>
+        </ul>
+    </div>
+    <div class=" chatsection">
+        <div class="heading">
+            <h3>Click Users to ChatHOST...</h3>
+        </div>
+        <div class="chatting">
+            <div class="chatarea">
+                <div class="myself">
+
+                </div>
+                <div class="others">
+
+                </div>
+            </div>
+            <form action="" id="chatform" >
+                <input type="text" name="msg" placeholder="Enter message.." class="msgbox">
+                <input type="submit" name="sendmsg" placeholder="" class="sendbox" value="send">
+            </form>
+        </div>
+    </div>
+</div> 
+
+<script>
+    var id_sender= '<%= user._id %> ';
+    var id_reciever;
+    var socket = io('/namespace1',{
+        auth:{
+            token:'<%= user._id %>' 
+        }
+    });
+
+
+
+    $(document).ready(function(){
+        $('.user-list').click(function(){
+            var chatter= $(this).attr('id');
+            id_reciever=chatter;
+            $('.heading').hide();
+            $('.chatsection').addClass('heightchg1'); 
+            $('.chatting').show();
+        });
+     });
+
+    $('#chatform').submit(function(event){
+        event.preventDefault();
+        var message=$('.msgbox').val();
+        console.log(message);
+        $.ajax({
+            url:'/chatsave',
+            type:'POST',
+            data:{id_sender:id_sender,id_reciever:id_reciever,message:message},
+            success:function(data){
+                if(data.success){
+                    $('.msgbox').val('');
+                    let chat=data.message;
+                    let html=`
+                    <div class="myself">
+                        <h5>`+chat+`</h5>
+                    </div>
+                    `
+                }
+                else{
+                    alert(data.msg);
+                }
+            }
+        });
+    })
+
+    socket.on('getonlinelist',function(data){
+        // $('#'+data.user_id+'-status').text('online');
+        $('#'+data.user_id).removeClass('offline');
+        $('#'+data.user_id).addClass('online');
+    })
+    socket.on('getofflinelist',function(data){
+        // $('#'+data.user_id+'-status').text('offline');
+        $('#'+data.user_id).addClass('offline');
+        $('#'+data.user_id).removeClass('online');
+    })
+
+</script>
+<%- include('layouts/footer.ejs') %>
